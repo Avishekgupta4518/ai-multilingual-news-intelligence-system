@@ -1,0 +1,14 @@
+streamlit
+transformers
+torch
+easyocr
+Pillow
+numpy
+deep-translator
+gTTS
+keybert
+sentence-transformers
+PyMuPDF
+
+
+# To install run pip install -r requirements.txt
