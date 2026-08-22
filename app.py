@@ -109,7 +109,7 @@ def load_keyword_model():
 
 
 # INITIALIZE MODELS
-with st.spinner("🚀 Loading AI models..."):
+with st.spinner(" Loading AI models..."):
     reader = load_ocr()
     tokenizer, summarization_model = load_summarization_model()
     category_classifier = load_category_classifier()
@@ -330,7 +330,7 @@ with st.sidebar:
     target_language = target_language.split()[0]
 
     st.divider()
-    st.subheader("🤖 AI Features")
+    st.subheader("AI Features")
 
     enable_category = st.checkbox("News Category", value=True)
     enable_sentiment = st.checkbox("Sentiment Analysis", value=True)
@@ -383,7 +383,7 @@ elif input_type == "✍️ Paste Text":
 # PROCESS CONTENT
 if extracted_text and extracted_text.strip():
     st.divider()
-    st.subheader("📄 Extracted / Input Text")
+    st.subheader(" Extracted / Input Text")
 
     edited_text = st.text_area(
         "You can edit and correct the text before AI processing",
@@ -403,39 +403,39 @@ if extracted_text and extracted_text.strip():
     st.divider()
 
     # ANALYZE BUTTON
-    if st.button("🚀 Analyze News Article", type="primary", use_container_width=True):
+    if st.button(" Analyze News Article", type="primary", use_container_width=True):
         if len(edited_text.split()) < 20:
             st.warning("⚠️ Please provide at least 20 words.")
         else:
             # SUMMARIZATION
-            with st.spinner("🧠 Generating AI summary..."):
+            with st.spinner(" Generating AI summary..."):
                 summary = summarize_text(edited_text, summary_type)
             st.session_state.summary = summary
 
             # TRANSLATION
             translated = ""
             if enable_translation:
-                with st.spinner("🌐 Translating summary..."):
+                with st.spinner(" Translating summary..."):
                     translated, language_code = translate_text(summary, target_language)
                 st.session_state.translated_text = translated
 
             # CATEGORY
             if enable_category:
-                with st.spinner("🏷️ Detecting news category..."):
+                with st.spinner(" Detecting news category..."):
                     category, category_score = classify_news(edited_text)
                 st.session_state.category = category
                 st.session_state.category_score = category_score
 
             # SENTIMENT
             if enable_sentiment:
-                with st.spinner("😊 Analyzing sentiment..."):
+                with st.spinner(" Analyzing sentiment..."):
                     sentiment, sentiment_score = analyze_sentiment(edited_text)
                 st.session_state.sentiment = sentiment
                 st.session_state.sentiment_score = sentiment_score
 
             # KEYWORDS
             if enable_keywords:
-                with st.spinner("🔑 Extracting keywords..."):
+                with st.spinner(" Extracting keywords..."):
                     keywords = extract_keywords(edited_text)
                 st.session_state.keywords = keywords
 
@@ -445,7 +445,7 @@ if extracted_text and extracted_text.strip():
                     audio_bytes = generate_speech(translated, language_code)
                 st.session_state.audio_bytes = audio_bytes
 
-            st.success("✅ News analysis completed successfully!")
+            st.success(" News analysis completed successfully!")
 
 # RESULTS SECTION
 if st.session_state.summary:
@@ -456,21 +456,21 @@ if st.session_state.summary:
     metrics = st.columns(3)
     if hasattr(st.session_state, "category"):
         metrics[0].metric(
-            "🏷️ Category",
+            " Category",
             st.session_state.category,
             f"{st.session_state.category_score:.0%} confidence"
         )
     if hasattr(st.session_state, "sentiment"):
         metrics[1].metric(
-            "😊 Sentiment",
+            " Sentiment",
             st.session_state.sentiment,
             f"{st.session_state.sentiment_score:.0%} confidence"
         )
-    metrics[2].metric("📝 Summary Type", summary_type)
+    metrics[2].metric("Summary Type", summary_type)
 
     # TABS
     tab1, tab2, tab3, tab4, tab5 = st.tabs(
-        ["🧠 Summary", "🌐 Translation", "🔑 Keywords", "🤖 Ask AI", "🔊 Speech & Download"]
+        [" Summary", "Translation", " Keywords", " Ask AI", " Speech & Download"]
     )
 
     # SUMMARY TAB
